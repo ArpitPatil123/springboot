@@ -27,6 +27,10 @@ jobs:
           mvn clean package
           cd target
           ls
+      - name: Create .ssh directory
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
 
       - name: Set up SSH key
         env:
