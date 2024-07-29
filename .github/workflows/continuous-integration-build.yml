@@ -29,5 +29,5 @@ jobs:
           ls
 
       - name: upload war to EC2
-        run: scp -i ${{ secrets.SECRET_KEY }} ./target/spring-boot-initial-0.0.1-SNAPSHOT.war username@${{ secrets.PUBLIC_IP }}:/opt/tomcat/webapps
+        run: scp -i ${{ secrets.SECRET_KEY }} spring-boot-initial-0.0.1-SNAPSHOT.war ec2-user@${{ secrets.PUBLIC_IP }}:/opt/tomcat/webapps
 
