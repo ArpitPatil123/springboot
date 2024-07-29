@@ -45,5 +45,7 @@ jobs:
           ls
 
       - name: upload war to EC2
-        run: scp -i private_key.pem spring-boot-initial-0.0.1-SNAPSHOT.war ec2-user@${{ secrets.PUBLIC_IP }}:/opt/tomcat/webapps
+        run: |
+          ls
+          scp -i private_key.pem spring-boot-initial-0.0.1-SNAPSHOT.war ec2-user@${{ secrets.PUBLIC_IP }}:/opt/tomcat/webapps
 
