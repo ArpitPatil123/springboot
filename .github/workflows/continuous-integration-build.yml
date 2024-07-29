@@ -25,6 +25,7 @@ jobs:
         run: |
           cd initial 
           mvn clean package
+          cd target
           ls
 
       - name: upload war to EC2
