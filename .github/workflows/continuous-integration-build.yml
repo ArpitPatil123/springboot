@@ -27,5 +27,5 @@ jobs:
           mvn clean package
 
       - name: list files
-        run: ls
+        run: cd initial/target
 
