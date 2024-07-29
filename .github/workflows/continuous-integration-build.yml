@@ -20,13 +20,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
-
-      - name: Build with Maven
-        run: |
-          cd initial 
-          mvn clean package
-          cd target
-          ls
+       
       - name: Create .ssh directory
         run: |
           mkdir -p ~/.ssh
@@ -42,6 +36,13 @@ jobs:
       - name: Add remote host to known hosts
         run: |
           ssh-keyscan -H ${{ secrets.PUBLIC_IP }} >> ~/.ssh/known_hosts
+      
+      - name: Build with Maven
+        run: |
+          cd initial 
+          mvn clean package
+          cd target
+          ls
 
       - name: upload war to EC2
         run: scp -i private_key.pem spring-boot-initial-0.0.1-SNAPSHOT.war ec2-user@${{ secrets.PUBLIC_IP }}:/opt/tomcat/webapps
