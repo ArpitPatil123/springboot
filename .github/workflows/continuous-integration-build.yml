@@ -35,6 +35,10 @@ jobs:
           echo "$SSH_KEY" > private_key.pem
           chmod 600 private_key.pem
 
+      - name: Add remote host to known hosts
+        run: |
+          ssh-keyscan -H ${{ secrets.PUBLIC_IP }} >> ~/.ssh/known_hosts
+
       - name: upload war to EC2
         run: scp -i private_key.pem spring-boot-initial-0.0.1-SNAPSHOT.war ec2-user@${{ secrets.PUBLIC_IP }}:/opt/tomcat/webapps
 
