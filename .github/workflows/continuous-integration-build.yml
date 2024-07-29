@@ -28,6 +28,13 @@ jobs:
           cd target
           ls
 
+      - name: Set up SSH key
+        env:
+          SSH_KEY: ${{ secrets.SECRET_KEY }}
+        run: |
+          echo "$SSH_KEY" > private_key.pem
+          chmod 600 private_key.pem
+
       - name: upload war to EC2
-        run: scp -i ${{ secrets.SECRET_KEY }} spring-boot-initial-0.0.1-SNAPSHOT.war ec2-user@${{ secrets.PUBLIC_IP }}:/opt/tomcat/webapps
+        run: scp -i private_key.pem spring-boot-initial-0.0.1-SNAPSHOT.war ec2-user@${{ secrets.PUBLIC_IP }}:/opt/tomcat/webapps
 
